@@ -1,0 +1,18 @@
+--- 
+- name: test playbook arista
+  hosts: arista
+  gather_facts: no
+
+  tasks:
+
+    - name: Test a command
+      eos_command:
+         commands:
+           - show running-config
+      connection: network_cli 
+      register: output
+ 
+    - name: display config
+      debug:
+        var: output
+  
