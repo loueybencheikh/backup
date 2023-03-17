@@ -1,15 +1,18 @@
 --- 
 - name: test playbook arista
   hosts: arista
+#gather_fact is causing problem to playbook for Arista always set it to no
   gather_facts: no
+#connection: network_cli needs to be specified in the playbook in order to module eos_command 
+#to run correctly
+  connection: network_cli
 
   tasks:
 
     - name: Test a command
       eos_command:
          commands:
-           - show running-config
-      connection: network_cli 
+           - show running-config 
       register: output
  
     - name: display config
