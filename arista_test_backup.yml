@@ -1,0 +1,16 @@
+--- 
+- name: test playbook arista
+  hosts: arista
+#gather_fact is causing problem to playbook for Arista always set it to no
+  gather_facts: no
+  connection: network_cli
+
+  tasks:
+
+    - name: backup configuration into file
+      eos_config:
+         backup: yes
+         backup_options:
+           filename: "{{inventory_hostname}}"
+           dir_path: /home/debian/git/network-conf/switching
+  
